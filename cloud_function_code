@@ -1,0 +1,27 @@
+from google.cloud import bigquery
+import base64
+import json
+
+# Initialize BigQuery client
+client = bigquery.Client()
+
+# Define your BigQuery dataset and table
+dataset_id = 'pubsub_dataset'
+table_id = 'pubsub_table'
+
+def main(event, context):
+    # Extracting message data from Pub/Sub
+    pubsub_data = base64.b64decode(event['data']).decode('utf-8')
+    data = json.loads(pubsub_data)
+    
+    # Constructing BigQuery table reference
+    table_ref = client.dataset(dataset_id).table(table_id)
+    table = client.get_table(table_ref)  # API request
+    
+    # Inserting data into BigQuery
+    errors = client.insert_rows_json(table, [data])
+    
+    if errors == []:
+        print('Data successfully inserted into BigQuery.')
+    else:
+        print(f'Errors encountered: {errors}')
