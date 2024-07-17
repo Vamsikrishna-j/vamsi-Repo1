@@ -1,0 +1,36 @@
+import apache_beam as beam
+from apache_beam.options.pipeline_options import PipelineOptions, GoogleCloudOptions, StandardOptions
+from apache_beam.io.gcp.bigquery import WriteToBigQuery
+
+# Define Dataflow pipeline options
+pipeline_options = PipelineOptions()
+google_cloud_options = pipeline_options.view_as(GoogleCloudOptions)
+google_cloud_options.project = 'cyber-technosoft'
+google_cloud_options.job_name = 'pubsub-to-bigquery'
+google_cloud_options.region = 'us'
+
+# Set up Pub/Sub input and BigQuery output
+input_topic = 'projects/cyber-technosoft/topics/mahesh-topic'
+output_table = 'cyber-technosoft:ayyapa_task.dataflowtable'
+
+# Pipeline function to process messages from Pub/Sub and write to BigQuery
+def process_message(message):
+    # Process message logic (parse, transform, etc.)
+    return {
+        'Id': message.get('Id', ''),
+        'Name': message.get('Name', '')
+    }
+
+# Create Dataflow pipeline
+with beam.Pipeline(options=pipeline_options) as pipeline:
+    (
+        pipeline
+        | 'Read from Pub/Sub' >> beam.io.ReadFromPubSub(topic=input_topic)
+        | 'Process messages' >> beam.Map(process_message)
+        | 'Write to BigQuery' >> WriteToBigQuery(
+            table=output_table,
+            schema='Id:STRING, Name:STRING',
+            create_disposition=beam.io.BigQueryDisposition.CREATE_IF_NEEDED,
+            write_disposition=beam.io.BigQueryDisposition.WRITE_APPEND
+        )
+    )
