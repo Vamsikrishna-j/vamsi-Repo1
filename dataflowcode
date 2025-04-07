@@ -34,7 +34,7 @@ with beam.Pipeline(options=pipeline_options) as pipeline:
             write_disposition=beam.io.BigQueryDisposition.WRITE_APPEND
         )
     )
-
+()
 
 
 
