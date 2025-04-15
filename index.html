@@ -23,7 +23,7 @@
 
         h1 {
             color: #333;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
 
         .link-box {
@@ -33,7 +33,6 @@
         a {
             text-decoration: none;
             color: white;
-            background-color: #0077b5;
             padding: 12px 20px;
             border-radius: 8px;
             display: inline-block;
@@ -41,11 +40,14 @@
             transition: background 0.3s ease;
         }
 
-        a:hover {
-            background-color: #005582;
-        }
-
+        .linkedin { background-color: #0077b5; }
         .naukri { background-color: #0d6efd; }
+        .facebook { background-color: #1877f2; }
+        .instagram { background-color: #e1306c; }
+
+        a:hover {
+            opacity: 0.9;
+        }
     </style>
 </head>
 <body>
@@ -54,7 +56,7 @@
     <h1>Welcome to Vamsi's Official Website</h1>
 
     <div class="link-box">
-        <a href="https://www.linkedin.com/in/vamsi-krishna-a641a1254/?trk=opento_sprofile_topcard" target="_blank">
+        <a href="https://www.linkedin.com/in/vamsi-krishna-a641a1254/?trk=opento_sprofile_topcard" target="_blank" class="linkedin">
             LinkedIn Profile
         </a>
     </div>
@@ -62,6 +64,18 @@
     <div class="link-box">
         <a href="https://www.naukri.com/mnjuser/profile/YOUR-NAUKRI-ID" target="_blank" class="naukri">
             Naukri Profile
+        </a>
+    </div>
+
+    <div class="link-box">
+        <a href="https://www.facebook.com/vamsikrishna.jonnalagadda.okk" target="_blank" class="facebook">
+            Facebook Profile
+        </a>
+    </div>
+
+    <div class="link-box">
+        <a href="https://www.instagram.com/vamsi_naidu__99/" target="_blank" class="instagram">
+            Instagram Profile
         </a>
     </div>
 </div>
