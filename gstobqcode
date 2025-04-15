@@ -1,6 +1,6 @@
 from google.cloud import bigquery
 
-# Initialize BigQuery client
+# Initialize BigQuery client client
 client = bigquery.Client()
 
 # Configure GCS file and BigQuery dataset and table
